@@ -2,6 +2,7 @@ package com.zeroten.flow;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class IfElseTest {
@@ -13,7 +14,7 @@ public class IfElseTest {
 
     int[] n = new int[4];
     @Test
-    public void splitNum(int num) {
+    public void splitNumTest(int num) {
         //输入
 //        Scanner sc = new Scanner(System.in);
 //        int num = sc.nextInt();
@@ -26,52 +27,61 @@ public class IfElseTest {
         n[3] = num%10;
     }
 
-    @Test
-    public void combination() {
+    @Test(description = "不完善，依然会有重复的情况出现，可继续优化")
+    public void combinationTest() {
         int num = 1260;
-        splitNum(num);
+        splitNumTest(num);
         //选定两个数放置在前面，作为十分位
         int n1;
         int n2;
         int temp;
 
         for(int i=0; i<4; i++) {
-            temp = n[0];
-            n[0] = n[i];
-            n[i] = temp;
-            for (int j=0; j<3; j++) {
+            int[] arr = Arrays.copyOf(n, 4);
+            temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+            for (int j=0; j<4; j++) {
                 if (i == j) {
                     continue;
                 }
-                temp = n[1];
-                n[1] = n[j];
-                n[j] = temp;
+                System.out.println(i + " " + j);
+                temp = arr[1];
+                arr[1] = arr[j];
+                arr[j] = temp;
                 /*
                 字符串修改后再次循环会按照修改后的字符串来使用
                  */
-                n1 = n[0]*10 + n[2];
-                n2 = n[1]*10 + n[3];
+                n1 = arr[0]*10 + arr[2];
+                n2 = arr[1]*10 + arr[3];
+                System.out.println(Arrays.toString(arr));
                 if (num == n1*n2) {
-//                    System.out.println(n1 + "+" + n2);
-                    System.out.println("success");
+//                    System.out.println(Arrays.toString(arr));
+//                    System.out.println(n1 + "*" + n2);
+                    System.out.println("success1");
+                    System.out.println();
                 }
-                n1 = n[0]+n[3];
-                n2 = n[1]+n[2];
+                n1 = arr[0]*10 + arr[3];
+                n2 = arr[1]*10 + arr[2];
+//                System.out.println(Arrays.toString(arr));
+//                System.out.println(n1 + "*" + n2);
                 if (num == n1*n2) {
-//                    System.out.println(n1 + "+" + n2);
-                    System.out.println("success");
+//                    System.out.println(Arrays.toString(arr));
+//                    System.out.println(n1 + "*" + n2);
+                    System.out.println("success2");
+                    System.out.println();
                 }
-                for(int k=0; k<4; k++) {
-                    System.out.print(n[k] + " ");
-                }
+
             }
         }
     }
 
     @Test
     public void equalTest() {
-        int n1 = 4096;
-        int n2 = 4096;
-        System.out.println(n1 == n2);
+        int[] arr = Arrays.copyOf(n, 4);
+
+        arr[0] = 100;
+        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(n));
     }
 }
