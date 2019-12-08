@@ -50,4 +50,42 @@ public class Methods {
         }
         return false;
     }
+    /*
+    返回长度
+     */
+    public int checkNumDigit(int num) {
+        boolean flag = true;
+        int i = 0;
+//        this.num = num;
+        while(flag) {
+            if (num/(int)Math.pow(10, i) <= 0) {
+                flag = false;
+            }else {
+                i++;
+            }
+        }
+        return i;
+    }
+    /*
+    返回数组，可以考虑是否可以将splitNum合并到一起
+     */
+    public int[] splitNum2(int num, int length) {
+        int[] arr = new int[length];
+        for(int i=0; i<length; i++){
+            arr[i] = num%(int)Math.pow(10, length-i)/(int)Math.pow(10, length-1-i);
+        }
+        return arr;
+    }
+    /*
+    判断是否为回文数
+     */
+    public boolean IsOrNot(int[] arr) {
+        for (int i=0; i<arr.length/2-1; i++) {
+            if(arr[i] != arr[arr.length-i-1]) {
+//                System.out.println(0);
+                return false;
+            }
+        }
+        return true;
+    }
 }
